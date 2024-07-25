@@ -4,8 +4,9 @@
             <NuxtLink to="/">Home</NuxtLink>
         </div>
         <section class="section one">
-            <h1>Section One</h1>
-            <p>Content for section one.</p>
+            <img src="/public/3.jpg" class="gallery__img" />
+            <!-- <h1>Section One</h1>
+            <p>Content for section one.</p> -->
         </section>
         <section class="section two">
             <h1>Section Two</h1>
@@ -32,6 +33,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import Lenis from 'lenis';
+import { general } from '@/store/index.js';
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
@@ -39,6 +41,7 @@ gsap.registerPlugin(ScrollTrigger);
 let lenis: any = null;
 
 onMounted(() => {
+    general.preloaderDelay = 25; // e.g., 25 ms delay for this pag
     // Initialize Lenis for smooth scrolling
     lenis = new Lenis({
         smoothWheel: true,
@@ -73,6 +76,7 @@ onMounted(() => {
         });
     }
 });
+
 </script>
 
 <style scoped>

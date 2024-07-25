@@ -2,7 +2,17 @@
     <div class="root-element">
         <NuxtLink to="/test">Test</NuxtLink>
         <div class="test">
-            dsdsdd
+            <div class="gallery">
+
+                <div v-for="_ in 1" class="gallery__wrap" :key="_">
+
+                    <div v-for="img in images" class="gallery__item" :key="img">
+                        <img :src="img" class="gallery__img" />
+                    </div>
+
+                </div>
+
+            </div>
         </div>
         <div class="test1">
             dsdsdd
@@ -21,17 +31,18 @@
         </div>
     </div>
 </template>
-
+z
 <script lang="ts" setup>
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
+import { general } from '@/store/index.js';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 onMounted(() => {
     const lenis = new Lenis();
-    lenis.on('scroll', (e:any) => {
+    lenis.on('scroll', (e: any) => {
         console.log(e)
     })
 
@@ -48,22 +59,24 @@ onMounted(() => {
     }
     requestAnimationFrame(raf);
 
-    // GSAP horizontal scroll
-    const horizontalScroll = document.querySelector('.horizontal-content');
+})
 
-    if (horizontalScroll) {
-        gsap.to(horizontalScroll, {
-            xPercent: -100, // Moves the content horizontally
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '.horizontal-scroll',
-                pin: true,
-                scrub: true,
-                end: '+=1000', // Adjust end point to match the desired scroll length
-            },
-        });
+watch(() => general.isPreloaderVisible, (val) => {
+    if (!val) {
+        gsap.from('.gallery', {
+            scale: 1.1,
+            opacity: 0.2,
+            duration: 1,
+            delay: 0.1
+        })
     }
 })
+
+const images = [
+    '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
+    '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg',
+    '11.jpg', '12.jpg',
+]
 </script>
 
 <style scoped>
@@ -101,5 +114,26 @@ onMounted(() => {
     min-width: 200%;
     display: flex;
     justify-content: space-between;
+}
+
+
+.gallery {
+    will-change: transform, opacity;
+}
+
+.gallery__wrap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.gallery__item {
+    height: 20vw;
+}
+
+.gallery__img {
+    vertical-align: top;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 </style>
