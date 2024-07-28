@@ -3,11 +3,16 @@
         <div>
             <NuxtLink to="/">Home</NuxtLink>
         </div>
-        <section class="section one">
-            <img src="/public/3.jpg" class="gallery__img" />
-            <!-- <h1>Section One</h1>
+        <!-- <section class="section one"> -->
+        <div class="some-div section ">
+            <p class="some-text" id="target">Example text animation</p>
+        </div>
+
+
+        <!-- <img src="/public/3.jpg" class="gallery__img" /> -->
+        <!-- <h1>Section One</h1>
             <p>Content for section one.</p> -->
-        </section>
+        <!-- </section> -->
         <section class="section two">
             <h1>Section Two</h1>
             <p>Content for section two.</p>
@@ -33,15 +38,17 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import Lenis from 'lenis';
-import { general } from '@/store/index.js';
+import { general } from '@/store/index.ts';
 import { gsap } from 'gsap';
+import SplitType from 'split-type';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 let lenis: any = null;
 
+
 onMounted(() => {
-    general.preloaderDelay = 25; // e.g., 25 ms delay for this pag
+    general.preloaderDelay = 1; // e.g., 25 ms delay for this pag
     // Initialize Lenis for smooth scrolling
     lenis = new Lenis({
         smoothWheel: true,
@@ -58,6 +65,19 @@ onMounted(() => {
     });
 
     gsap.ticker.lagSmoothing(0);
+
+
+    const text = new SplitType('#target', { types: 'words, chars' as any })
+
+    console.log(text)
+
+    gsap.from(text.chars, {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        stagger: { amount: 0.1 },
+    })
+
 
     // GSAP ScrollTrigger for horizontal scrolling
     const horizontalContent = document.querySelector('.horizontal-content');
@@ -118,5 +138,17 @@ onMounted(() => {
     justify-content: center;
     font-size: 2rem;
     padding: 1rem;
+}
+
+.some-div {
+    width: 100%;
+    background: white;
+    height: 300px;
+    padding: 120px;
+}
+
+.some-text {
+    font-size: 50px;
+    font-weight: 500;
 }
 </style>

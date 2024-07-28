@@ -35,7 +35,7 @@ z
 <script lang="ts" setup>
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
-import { general } from '@/store/index.js';
+import { general } from '@/store/index.ts';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
