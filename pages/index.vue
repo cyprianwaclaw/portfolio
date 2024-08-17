@@ -1,17 +1,23 @@
 <template>
-    <div class="root-element">
+    <div>
+        <SectionsHomeHero />
+        <SectionsText />
+                            <!-- <Icon name="ph:arrow-right-bold" size="52" class="text-red-500"/> -->
+
+        <div class="pt-[170px] ml-12">
+            testxccc
+        </div>
+        <div class="text-container" ref="textContainer">
+            <h1 class="animated-text">To jest animowany tekst</h1>
+        </div>
         <NuxtLink to="/test">Test</NuxtLink>
         <div class="test">
             <div class="gallery">
-
                 <div v-for="_ in 1" class="gallery__wrap" :key="_">
-
                     <div v-for="img in images" class="gallery__item" :key="img">
                         <img :src="img" class="gallery__img" />
                     </div>
-
                 </div>
-
             </div>
         </div>
         <div class="test1">
@@ -26,24 +32,26 @@
                 <div class="horizontal-content">Content that scrolls horizontally</div>
             </div>
         </div>
-        <div class="test4">
-            dsdsdd
-        </div>
     </div>
 </template>
-z
+
 <script lang="ts" setup>
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { general } from '@/store/index.ts';
+import SplitType from 'split-type';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const textContainer = ref(null) as any
+
+let tl1 = ref() as any
+
 onMounted(() => {
     const lenis = new Lenis();
     lenis.on('scroll', (e: any) => {
-        console.log(e)
+        // console.log(e)
     })
 
     lenis.on('scroll', ScrollTrigger.update)
@@ -58,6 +66,24 @@ onMounted(() => {
         requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
+    animateText()
+
+    const split = new SplitType(".wrapper p", {
+        types: "chars",
+    });
+    tl1 = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#textSection",
+            start: "top -50%",
+            end: "+=40%",
+            pin: true,
+            scrub: 0.7,
+        }
+    })
+        .set(split.chars, {
+            color: "black",
+            stagger: 0.1,
+        }, 0.1);
 
 })
 
@@ -77,6 +103,24 @@ const images = [
     '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg',
     '11.jpg', '12.jpg',
 ]
+
+const animateText = () => {
+    gsap.fromTo(
+        textContainer.value.querySelector('.animated-text'),
+        {
+            // opacity: 0,
+            y: 50,
+            rotation: -13,
+        },
+        {
+            // opacity: 1,
+            y: 0,
+            rotation: 0,
+            duration: 1.5,
+            ease: 'power3.out',
+        }
+    );
+};
 </script>
 
 <style scoped>
@@ -135,5 +179,23 @@ const images = [
     width: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+.text-container {
+    overflow: hidden;
+    /* height: 2rem; */
+    /* Zapewnia, że tekst nie wychodzi poza kontener przed animacją */
+}
+
+.animated-text {
+    font-size: 2rem;
+    color: #333;
+}
+
+.reveal-text-home {
+    width: 60%;
+    margin-left: 200px;
+    margin-top: 200px;
+    color: #d5d5d5b2;
 }
 </style>

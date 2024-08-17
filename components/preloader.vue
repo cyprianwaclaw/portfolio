@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { gsap } from 'gsap'
-const DELAY_BETWEEN_PHOTO_LOADED = 200
+const DELAY_BETWEEN_PHOTO_LOADED = 2
 const number_of_images_loaded = ref(0)
 const total_images = ref(0)
 const image_index = ref(0)

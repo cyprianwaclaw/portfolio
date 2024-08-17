@@ -1,38 +1,72 @@
 <template>
-    <div class="app-container">
-        <div>
-            <NuxtLink to="/">Home</NuxtLink>
-        </div>
-        <!-- <section class="section one"> -->
-        <div class="some-div section ">
-            <p class="some-text" id="target">Example text animation</p>
-        </div>
+    <NuxtLayout>
 
 
-        <!-- <img src="/public/3.jpg" class="gallery__img" /> -->
-        <!-- <h1>Section One</h1>
-            <p>Content for section one.</p> -->
-        <!-- </section> -->
-        <section class="section two">
-            <h1>Section Two</h1>
-            <p>Content for section two.</p>
-        </section>
-        <section class="section three">
-            <h1>Section Three</h1>
-            <p>Content for section three.</p>
-        </section>
-        <section class="horizontal-section">
-            <div class="horizontal-content">
-                <div class="horizontal-item">Horizontal Item 1</div>
-                <div class="horizontal-item">Horizontal Item 2</div>
-                <div class="horizontal-item">Horizontal Item 3</div>
+        <div class="app-container">
+            <div>
+                <NuxtLink to="/">Home</NuxtLink>
             </div>
-        </section>
-        <section class="section four">
-            <h1>Section Four</h1>
-            <p>Content for section four.</p>
-        </section>
-    </div>
+            <!-- <section class="section one"> -->
+            <div class="horizontal-content2">
+                <div class="horizontal-content1">
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                    <div class="horizontal-item1">Horizontal Item 2</div>
+                </div>
+            </div>
+            <div class="some-div section ">
+                <p class="some-text" id="target">Example text animation</p>
+            </div>
+
+
+            <section class="section two">
+                <h1>Section Two</h1>
+                <p>Content for section two.</p>
+            </section>
+            <section class="section three">
+                <h1>Section Three</h1>
+                <p>Content for section three.</p>
+            </section>
+            <section class="horizontal-section">
+                <div class="horizontal-content ">
+                    <div class="horizontal-item">Horizontal Item 1</div>
+                    <div class="horizontal-item">Horizontal Item 1</div>
+                    <div class="horizontal-item">Horizontal Item 1</div>
+                    <!-- <div class="horizontal-item">Horizontal Item 3</div> -->
+                </div>
+            </section>
+            <section class="section four">
+                <h1>Section Four</h1>
+                <p>Content for section four.</p>
+            </section>
+        </div>
+    </NuxtLayout>
 </template>
 
 <script setup lang="ts">
@@ -54,10 +88,6 @@ onMounted(() => {
         smoothWheel: true,
     });
 
-    lenis.on('scroll', (e: any) => {
-        console.log(e);
-    });
-
     lenis.on('scroll', ScrollTrigger.update);
 
     gsap.ticker.add((time) => {
@@ -66,10 +96,7 @@ onMounted(() => {
 
     gsap.ticker.lagSmoothing(0);
 
-
     const text = new SplitType('#target', { types: 'words, chars' as any })
-
-    console.log(text)
 
     gsap.from(text.chars, {
         opacity: 0,
@@ -79,12 +106,57 @@ onMounted(() => {
     })
 
 
+    // Horizontal continuous scrolling animation
+    const horizontalContent1 = document.querySelector('.horizontal-content1');
+    const itemsCount = horizontalContent1 ? horizontalContent1.children.length : 0;
+
+    if (horizontalContent1) {
+        // Continuous scrolling
+        gsap.to(horizontalContent1, {
+            xPercent: -60 * itemsCount,
+            ease: 'linear',
+            // repeat: 2,
+            duration: 70,
+        });
+    }
+
+    const horizontalContent2 = document.querySelector('.horizontal-content2');
+
+    if (horizontalContent2) {
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: ".horizontal-content2",
+                start: 'center center',
+                end: 'bottom top',
+                scrub: 0.5,
+            }
+        })
+            .to('.horizontal-content2', {
+                rotation: 360,
+                ease: 'none',
+            });
+        // gsap.to(horizontalContent2, {
+        //     xPercent: -100 * (horizontalContent2.children.length - 1),
+        //     ease: 'none',
+        //     scrollTrigger: {
+        //         trigger: '.horizontal-section2',
+        //         pin: true,
+        //         // rotate:200,
+        //         scrub: true,
+        //         start: 'top top',
+        //         end: () => `+=${horizontalContent2.scrollWidth}`,
+        //     },
+        // });
+    }
+
+
     // GSAP ScrollTrigger for horizontal scrolling
     const horizontalContent = document.querySelector('.horizontal-content');
 
     if (horizontalContent) {
         gsap.to(horizontalContent, {
-            xPercent: -100 * (horizontalContent.children.length - 1),
+            // backgroundColor: "#ff0000", // Zmiana koloru na czerwony
+            xPercent: -50 * (horizontalContent.children.length - 1),
             ease: 'none',
             scrollTrigger: {
                 trigger: '.horizontal-section',
@@ -119,18 +191,35 @@ onMounted(() => {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    width: 100vw;
+    /* width: 100vw; */
     overflow: hidden;
     background-color: #333;
 }
 
 .horizontal-content {
     display: flex;
-    width: max-content;
+    /* width: max-content; */
+}
+
+.horizontal-content1 {
+    margin-left: -200px;
+    display: flex;
+    width: 400px;
 }
 
 .horizontal-item {
     min-width: 100vw;
+    background-color: #444;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+.horizontal-item1 {
+    min-width: 300px;
     background-color: #444;
     color: white;
     display: flex;
@@ -150,5 +239,21 @@ onMounted(() => {
 .some-text {
     font-size: 50px;
     font-weight: 500;
+}
+
+/* .scrolling-text-container {
+    position: relative;
+    width: 100vw;
+    overflow: hidden;
+    z-index: 10;
+} */
+
+.scrolling-text {
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000;
 }
 </style>
