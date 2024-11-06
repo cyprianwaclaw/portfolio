@@ -1,5 +1,5 @@
 <template>
-    <div class="relative w-full h-screen flex justify-center items-center flex-col">
+    <div class="relative w-full h-screen flex justify-center items-center flex-col -pt-[120px]">
         <div class="justify-start">
             <h2 class="font-semibold text-[31px]">My name is</h2>
             <h1 class="font-semibold text-[100px] -mt-[16px] tracking-[4px]">CYPRIAN WACŁAW</h1>
@@ -23,13 +23,9 @@
             </div>
         </div>
         <div class="flex absolute bottom-2 right-[28px]  gap-[21px] place-items-center">
-        <button @click="toggleMenu" ref="buttonRef" @mouseenter="handleMouse" @mouseleave="handleMouse"
-            class="w-inline-block flex items-center custom-shadow justify-center flex items-center gap-2  rounded-full h-[45px] w-[140px] elementToAnimate bg-[#3EE9E9]">
-            <div class="div-block-3">
-                <div ref="titleARef" id="title-a">LET’S TALK</div>
-                <div ref="titleAARef" class="text-block-3" id="title-aa">LET’S TALK</div>
+            <div class="w-[145px]">
+                <ButtonsAnimation @clickButton="toggleClick" text="LETS TALK" bgColor="#3EE9E9" />
             </div>
-        </button>
             <div v-for="(item, index) in linkMenuArray1" :key="index" class="my-[45px]">
                 <p class="links-menu">
                     {{ item.name }}
@@ -38,18 +34,9 @@
         </div>
     </div>
 </template>
+
+
 <script lang="ts" setup>
-import gsap from 'gsap';
-import SplitType from 'split-type';
-
-let tl = ref() as any
-const buttonRef = ref(null);
-const titleARef = ref(null);
-const titleAARef = ref(null);
-const handleMouse = () => {
-    tl.restart();
-};
-
 const linkMenuArray = reactive([
     { name: "Instagram", link: "/" },
     { name: "Behance", link: "/" },
@@ -62,39 +49,11 @@ const linkMenuArray1 = reactive([
     { name: "Projects", link: "/" },
 ])
 
-const toggleMenu = () => { }
-
-onMounted(() => {
-    // textMenu.value = 'MENU';
-
-    const split = new SplitType(titleARef.value, { types: 'chars' })
-    const splitb = new SplitType(titleAARef.value, { types: 'chars' })
-
-    tl = gsap.timeline({ paused: true })
-    tl.to(split.chars, {
-        duration: 0.3,
-        yPercent: -100,
-        stagger: 0.03
-    });
+const toggleClick = () => { }
 
 
-    tl.fromTo(
-        splitb.chars,
-        {
-            yPercent: 100,
-        },
-        {
-            duration: 0.3,
-            yPercent: 0,
-            stagger: 0.03
-        },
-        "<"
-    )
-
-    // timeline = gsap.timeline({ paused: true })
-    // timeline.fromTo('.elementToAnimate', { color: 'black', borderColor: 'black' }, { color: 'white', borderColor: 'white' });
-})
 </script>
+
 <style lang='scss' scoped>
 .links-menu {
     color: #313131c0;
@@ -108,9 +67,11 @@ onMounted(() => {
     cursor: pointer;
     transition: color 0.2s;
 }
+
 .custom-shadow {
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.05);
 }
+
 .div-block-3 {
     flex-direction: column;
     align-items: flex-start;

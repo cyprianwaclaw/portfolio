@@ -1,11 +1,52 @@
 <template>
-      <div class="lenis-c">
-        <Preloader />
-            <NuxtLayout>
-              <NuxtPage />
-            </NuxtLayout>
-      </div>
+  <div class="lenis-c">
+    <Preloader />
+    <NuxtLayout>
+      <!-- <div v-for="image in images" :key="image">
+        <img :src="image" alt="Public image" />
+      </div> -->
+      <!-- <img src="/13.jpg" /> -->
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>
+<script setup lang="ts">
+
+// Function to return a list of image URLs
+// const getImages = () => {
+//   // Manually add the image paths relative to the public directory
+//   return [
+//     '/13.jpg',
+//     // '/image2.png',
+//     // '/image3.gif',
+//     // Add all other images here
+//   ]
+// }
+
+// Simulate fetching the images, in a real scenario this might be an API call
+// const { data: images } = useAsyncData('images', () => Promise.resolve(getImages()))
+
+// const prefetchImages = () => {
+//   const images = [
+//     '/13.jpg',
+//     '/images/image1.jpg',
+//     '/images/image2.jpg',
+//     '/images/image3.jpg'
+//   ];
+
+//   images.forEach((image) => {
+//     const link = document.createElement('link');
+//     link.rel = 'prefetch';
+//     link.href = image;
+//     document.head.appendChild(link);
+//   });
+// };
+
+// // Prefetch images when the component is mounted
+// onMounted(() => {
+//   prefetchImages();
+// });
+</script>
 <style scoped>
 html.lenis,
 html.lenis body {
@@ -41,6 +82,7 @@ html {
   padding: 0;
   overflow-x: hidden;
 }
+
 /* 
   .cursor-preview__title {
     font-size: 20px;
@@ -96,5 +138,4 @@ html {
       background: #78fff1;
       border-radius: 50%;
     } */
-
 </style>

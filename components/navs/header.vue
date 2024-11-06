@@ -4,18 +4,11 @@
         <div class="p-9 flex w-full justify-between items-center fixed z-50">
             <p @click="goToHome" class="text-xl tracking-wider elementToAnimate">CYPRIAN WACŁAW</p>
             <div class="flex items-center gap-10">
-                <!-- <div class="flex gap-2">
-                    <p class="text-lg elementToAnimate">EN</p>
-                    <p class="text-lg elementToAnimate">/</p>
-                    <p class="text-lg elementToAnimate">PL</p>
-                </div> -->
-                <button @click="toggleMenu" ref="buttonRef" @mouseenter="handleMouse" @mouseleave="handleMouse"
-                    class="w-inline-block flex items-center justify-center flex items-center gap-2 border rounded-full h-[44px] w-[100px] elementToAnimate">
-                    <div class="div-block-3">
-                        <div ref="titleARef" id="title-a">MENU</div>
-                        <div ref="titleAARef" class="text-block-3" id="title-aa">MENU</div>
-                    </div>
-                </button>
+                <div class="w-[100px] border elementToAnimate rounded-full">
+                    <ButtonsAnimation v-if="textColor === 'white'" @clickButton="toggleMenu" text="CLOSE"
+                        :textColor="textColor" />
+                    <ButtonsAnimation v-else @clickButton="toggleMenu" text="MENU" :textColor="textColor" />
+                </div>
             </div>
         </div>
     </div>
@@ -23,93 +16,63 @@
 
 <script lang="ts" setup>
 import gsap from 'gsap';
-import SplitType from 'split-type';
 
 const isOpen = ref(false);
-const textMenu = ref();
-let timeline = ref() as any
-let tl = ref() as any
+const textColor = ref('black');
+
+let timeline = ref() as any;
 
 const goToHome = () => {
     useRouter().push('/');
 };
 
-
-const handleMouse = () => {
-    tl.restart();
-};
-
-// const handleMouseLeave = () => {
-//     if (!clicked.value) {
-//         tl.restart();
-//     }
-// };
-
-
 const toggleMenu = () => {
     isOpen.value = !isOpen.value;
 
     if (isOpen.value) {
-        playAnimation(timeline);
-        textMenu.value = "CLOSE";
+        playAnimation()
+        setTimeout(() => {
+            textColor.value = 'white'
+        }, 450)
     } else {
         setTimeout(() => {
-            reverseAnimation(timeline);
-            textMenu.value = "MENU";
+            textColor.value = 'black'
+        }, 1000);
+        setTimeout(() => {
+            reverseAnimation();
         }, 700);
     }
+}
+
+const playAnimation = () => {
+    gsap.to('.elementToAnimate', {
+        color: 'white',
+        borderColor: 'white',
+        ease: 'power2.out'
+    });
 };
 
-const buttonRef = ref(null);
-const titleARef = ref(null);
-const titleAARef = ref(null);
-
+const reverseAnimation = () => {
+    gsap.to('.elementToAnimate', {
+        color: 'black',
+        borderColor: 'black',
+        ease: 'power2.out'
+    });
+};
 
 onMounted(() => {
-    textMenu.value = 'MENU';
-
-    const split = new SplitType(titleARef.value, { types: 'chars' })
-    const splitb = new SplitType(titleAARef.value, { types: 'chars' })
-
-    tl = gsap.timeline({ paused: true })
-    tl.to(split.chars, {
-        duration: 0.3,
-        yPercent: -100,
-        stagger: 0.03
-    });
-
-
-    tl.fromTo(
-        splitb.chars,
-        {
-            yPercent: 100,
-        },
-        {
-            duration: 0.3,
-            yPercent: 0,
-            stagger: 0.03
-        },
-        "<"
-    )
-
-    timeline = gsap.timeline({ paused: true })
-    timeline.fromTo('.elementToAnimate', { color: 'black', borderColor: 'black' }, { color: 'white', borderColor: 'white' });
-})
+    timeline.value = gsap.timeline({ paused: true });
+    timeline.value.fromTo(
+        '.elementToAnimate',
+        { color: 'black', borderColor: 'black' },
+        { color: 'white', borderColor: 'white' }
+    );
+});
 </script>
 
 <style scoped>
-.div-block-3 {
-    flex-direction: column;
-    align-items: flex-start;
-    display: flex;
-    overflow: hidden;
-    position: relative;
-}
-
-.text-block-3 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+.elementToAnimate {
+    transition: color 0.5s, border-color 0.5s;
+    /* border: 1px solid black; */
 }
 </style>

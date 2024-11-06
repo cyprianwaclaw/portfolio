@@ -1,17 +1,26 @@
 <template>
-    <div>
+    <div class="cursor-default">
         <SectionsHomeHero />
-        <SectionsText />
-                            <!-- <Icon name="ph:arrow-right-bold" size="52" class="text-red-500"/> -->
-
-        <div class="pt-[170px] ml-12">
-            testxccc
+        <SectionsText class="pt-[21px]" />
+        <SectionsHomeImages class="pt-[85px]" />
+        <SectionsTextBigImage class="pt-[35px]" />
+        <SectionsDarkElement />
+        <SectionsHomeHero class="-mt-[1600px]"/>
+        <SectionsHomeHero />
+        <SectionsHomeHero />
+        <SectionsHomeHero />
+        <SectionsHomeHero />
+        <SectionsHomeHero />
+        <!-- <div class="test10">
+            <p class="text-[50px]">
+                dsdsdd
+            </p>
         </div>
-        <div class="text-container" ref="textContainer">
+        <div class="text-container " ref="textContainer">
             <h1 class="animated-text">To jest animowany tekst</h1>
-        </div>
-        <NuxtLink to="/test">Test</NuxtLink>
-        <div class="test">
+        </div> -->
+        <!-- <NuxtLink to="/test">Test</NuxtLink>
+        <div class="test mt-[800px]">
             <div class="gallery">
                 <div v-for="_ in 1" class="gallery__wrap" :key="_">
                     <div v-for="img in images" class="gallery__item" :key="img">
@@ -19,9 +28,11 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="test1">
-            dsdsdd
+        </div> -->
+        <!-- <div class="test1">
+            <p class="text-[50px]">
+                dsdsdd
+            </p>
         </div>
         <div class="test2">
             dsdsdd
@@ -31,7 +42,7 @@
             <div class="horizontal-scroll">
                 <div class="horizontal-content">Content that scrolls horizontally</div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -53,9 +64,7 @@ onMounted(() => {
     lenis.on('scroll', (e: any) => {
         // console.log(e)
     })
-
     lenis.on('scroll', ScrollTrigger.update)
-
     gsap.ticker.add((time) => {
         lenis.raf(time * 1000)
     })
@@ -66,7 +75,7 @@ onMounted(() => {
         requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
-    animateText()
+    // animateText()
 
     const split = new SplitType(".wrapper p", {
         types: "chars",
@@ -101,32 +110,61 @@ watch(() => general.isPreloaderVisible, (val) => {
 const images = [
     '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
     '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg',
-    '11.jpg', '12.jpg',
+    '11.jpg', '13.jpg'
 ]
 
-const animateText = () => {
-    gsap.fromTo(
-        textContainer.value.querySelector('.animated-text'),
-        {
-            // opacity: 0,
-            y: 50,
-            rotation: -13,
-        },
-        {
-            // opacity: 1,
-            y: 0,
-            rotation: 0,
-            duration: 1.5,
-            ease: 'power3.out',
-        }
-    );
-};
+// const animateText = () => {
+//     gsap.fromTo(
+//         textContainer.value.querySelector('.animated-text'),
+//         {
+//             // opacity: 0,
+//             y: 50,
+//             rotation: -13,
+//         },
+//         {
+//             // opacity: 1,
+//             y: 0,
+//             rotation: 0,
+//             duration: 1.5,
+//             ease: 'power3.out',
+//         }
+//     );
+// };
+
+
+// const prefetchImages = () => {
+//     const images = [
+//          '/photo_some.webp',
+//         '/images/image1.jpg',
+//         '/images/image2.jpg',
+//         '/images/image3.jpg'
+//     ];
+
+//     images.forEach((image) => {
+//         const link = document.createElement('link');
+//         link.rel = 'prefetch';
+//         link.href = image;
+//         document.head.appendChild(link);
+//     });
+// };
+
+// // Prefetch images when the component is mounted
+// onMounted(() => {
+//     prefetchImages();
+// });
 </script>
 
 <style scoped>
 .test {
     height: 100vh;
-    background: gray;
+    background: #3EE9E9;
+}
+
+.test10 {
+    height: 100vh;
+    background: #49507B;
+    margin-top: -300px;
+    z-index: 200;
 }
 
 .test1 {
@@ -171,25 +209,29 @@ const animateText = () => {
 }
 
 .gallery__item {
-    height: 20vw;
+    height: 300px;
+    width: 300px;
 }
 
 .gallery__img {
     vertical-align: top;
-    width: 100%;
+    height: 300px;
+    width: 300px;
     object-fit: cover;
     object-position: center;
 }
 
 .text-container {
     overflow: hidden;
+    height: 100vh;
+    /* background: #49507B; */
     /* height: 2rem; */
     /* Zapewnia, że tekst nie wychodzi poza kontener przed animacją */
 }
 
 .animated-text {
     font-size: 2rem;
-    color: #333;
+    color: #ffffff;
 }
 
 .reveal-text-home {
