@@ -2,7 +2,13 @@
     <div class="flex  opacity-change-class flex-col justify-start">
         <div class="flex mx-[200px]">
             <div class="mt-[13px] mr-[50px] iconChange flex justify-start">
-                <Icon name="raphael:plus" size="62" class="iconClass" />
+                <svg class="iconClass" width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M50.3362 24.9857H37.4131V12.0703H24.4997V24.9857H11.5862V37.9011H24.5036V50.8184H37.417V37.8972H50.3343L50.3362 24.9857Z"
+                        fill="black" />
+                </svg>
+
+                <!-- <Icon name="raphael:plus" size="62" class="iconClass" /> -->
             </div>
             <div class="relative -mt-[8px] -ml-[45px]">
                 <p class="text-sentence text absolute top-0">
