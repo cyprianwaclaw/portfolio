@@ -40,7 +40,7 @@
 import gsap from 'gsap'
 import { storeToRefs } from "pinia"
 import { useState } from "@/store/state"
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 const { isBlackHeader, isBgBlack } = storeToRefs(useState())
 

@@ -27,7 +27,7 @@ import Lenis from 'lenis'
 import { gsap } from 'gsap'
 import { general } from '@/store/index'
 import SplitType from 'split-type'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger);
 

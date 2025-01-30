@@ -20,7 +20,7 @@
 
 <script lang="ts" setup>
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 let tl = ref() as any
