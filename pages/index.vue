@@ -1,59 +1,40 @@
 <template>
     <div class="cursor-default">
+        <!-- <div class="flex w-full h-screen justify-center items-center ml-[300px]"> -->
+        <!-- <div class="image-wrapper">
+                <img src="/13.jpg" />
+            </div> -->
+        <!-- </div> -->
+        <!-- <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_632/3e933f181867459.6523d1cb7fd33.jpg"
+            alt="Obraz z Behance" /> -->
+        <!-- <img :src="`http://localhost:3000/13.jpg`" /> -->
         <SectionsHomeHero />
-        <SectionsText class="pt-[21px]" />
+        <!-- <SectionsText class="my-[21px] pb-[400px]" /> -->
+        <SectionsTextReveal />
+        <!-- <SectionsText1 class="pt-[21px]" /> -->
         <SectionsHomeImages class="pt-[85px]" />
-        <SectionsTextBigImage class="pt-[35px]" />
-        <SectionsDarkElement />
-        <SectionsHomeHero class="-mt-[1600px]"/>
-        <SectionsHomeHero />
-        <SectionsHomeHero />
-        <SectionsHomeHero />
-        <SectionsHomeHero />
-        <SectionsHomeHero />
-        <!-- <div class="test10">
-            <p class="text-[50px]">
-                dsdsdd
-            </p>
-        </div>
-        <div class="text-container " ref="textContainer">
-            <h1 class="animated-text">To jest animowany tekst</h1>
-        </div> -->
-        <!-- <NuxtLink to="/test">Test</NuxtLink>
-        <div class="test mt-[800px]">
-            <div class="gallery">
-                <div v-for="_ in 1" class="gallery__wrap" :key="_">
-                    <div v-for="img in images" class="gallery__item" :key="img">
-                        <img :src="img" class="gallery__img" />
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- <div class="test1">
-            <p class="text-[50px]">
-                dsdsdd
-            </p>
-        </div>
-        <div class="test2">
-            dsdsdd
-        </div>
-        <div class="test3">
-            dsdsdd
-            <div class="horizontal-scroll">
-                <div class="horizontal-content">Content that scrolls horizontally</div>
-            </div>
-        </div> -->
+        <SectionsTextBigImage class="pt-[100px]" />
+        <SectionsTextBigImage1 class="pt-[35px]" />
+        <SectionsBlackSection />
+        <SectionsWhiteSection />
+        <!-- <SectionsTextBigImage class="pt-[100px]" />
+        <SectionsDarkElement class="mt-[435px]" /> -->
     </div>
 </template>
 
 <script lang="ts" setup>
-import Lenis from 'lenis';
-import { gsap } from 'gsap';
-import { general } from '@/store/index.ts';
-import SplitType from 'split-type';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from 'lenis'
+import { gsap } from 'gsap'
+import { general } from '@/store/index'
+import SplitType from 'split-type'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Każdy projekt to odpowiedź na potrzeby użytkowników, to gotowość do poszukiwania nowych
+//                         rozwiązań i przekraczania dotychczasowych granic, by dostarczać wartość, która rzeczywiście robi różnice
+
+// https://mir-s3-cdn-cf.behance.net/project_modules/source/3e933f181867459.6523d1cb7fd33.jpg 1600w, https://mir-s3-cdn-cf.behance.net/project_modules/max_632/3e933f181867459.6523d1cb7fd33.jpg 843w, https://mir-s3-cdn-cf.behance.net/project_modules/max_316/3e933f181867459.6523d1cb7fd33.jpg 421w, https://mir-s3-cdn-cf.behance.net/project_modules/max_158/3e933f181867459.6523d1cb7fd33.jpg 211w, https://mir-s3-cdn-cf.behance.net/project_modules/disp/3e933f181867459.6523d1cb7fd33.jpg 600w, https://mir-s3-cdn-cf.behance.net/project_modules/hd/3e933f181867459.6523d1cb7fd33.jpg 1240w, https://mir-s3-cdn-cf.behance.net/project_modules/fs/3e933f181867459.6523d1cb7fd33.jpg 1600w, https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/3e933f181867459.6523d1cb7fd33.jpg 1200w, https://mir-s3-cdn-cf.behance.net/project_modules/1400/3e933f181867459.6523d1cb7fd33.jpg 1400w
 
 const textContainer = ref(null) as any
 
@@ -75,43 +56,39 @@ onMounted(() => {
         requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
-    // animateText()
 
-    const split = new SplitType(".wrapper p", {
-        types: "chars",
-    });
-    tl1 = gsap.timeline({
-        scrollTrigger: {
-            trigger: "#textSection",
-            start: "top -50%",
-            end: "+=40%",
-            pin: true,
-            scrub: 0.7,
-        }
-    })
-        .set(split.chars, {
-            color: "black",
-            stagger: 0.1,
-        }, 0.1);
+    // gsap.fromTo(
+    //     'img',
+    //     {
+    //         clipPath: 'inset(100% 0 0 0)',
+    //         scale: 1.2
+    //     },
+    //     {
+    //         clipPath: 'inset(0% 0 0 0)',
+    //         scale: 1,
+    //         duration: 1.5,
+    //         ease: 'power2.inOut'
+    //     }
+    // );
 
 })
 
-watch(() => general.isPreloaderVisible, (val) => {
-    if (!val) {
-        gsap.from('.gallery', {
-            scale: 1.1,
-            opacity: 0.2,
-            duration: 1,
-            delay: 0.1
-        })
-    }
-})
+// watch(() => general.isPreloaderVisible, (val) => {
+//     if (!val) {
+//         gsap.from('.gallery', {
+//             scale: 1.1,
+//             opacity: 0.2,
+//             duration: 1,
+//             delay: 0.1
+//         })
+//     }
+// })
 
-const images = [
-    '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
-    '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg',
-    '11.jpg', '13.jpg'
-]
+// const images = [
+//     '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
+//     '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg',
+//     '11.jpg'
+// ]
 
 // const animateText = () => {
 //     gsap.fromTo(
@@ -134,7 +111,7 @@ const images = [
 
 // const prefetchImages = () => {
 //     const images = [
-//          '/photo_some.webp',
+//         '/photo_some.webp',
 //         '/images/image1.jpg',
 //         '/images/image2.jpg',
 //         '/images/image3.jpg'
@@ -224,14 +201,14 @@ const images = [
 .text-container {
     overflow: hidden;
     height: 100vh;
-    /* background: #49507B; */
+    background: #3EE9E9;
     /* height: 2rem; */
     /* Zapewnia, że tekst nie wychodzi poza kontener przed animacją */
 }
 
 .animated-text {
     font-size: 2rem;
-    color: #ffffff;
+    color: #49507B;
 }
 
 .reveal-text-home {

@@ -1,16 +1,16 @@
 <template>
-    <div class="m-[200px] rotate-6">
-        <div class="flex gap-[48px] -ml-[1500px] moving-text">
+    <div class="rotate-6">
+        <div class="flex gap-[48px] -ml-[1500px] moving-text2">
             <div v-for="(text, index) in textArray" :key="index">
                 <p :class="text.class">{{ text.text }}</p>
             </div>
         </div>
-        <div class="flex gap-[48px] mr-[1300px] moving-text1 my-[12px]">
+        <div class="flex gap-[48px] mr-[1300px] moving-text3 my-[12px]">
             <div v-for="(text, index) in textArray1" :key="index">
                 <p :class="text.class">{{ text.text }}</p>
             </div>
         </div>
-        <div class="flex gap-[48px] -ml-[2000px] moving-text">
+        <div class="flex gap-[48px] -ml-[2000px] moving-text2">
             <div v-for="(text, index) in textArray" :key="index">
                 <p :class="text.class">{{ text.text }}</p>
             </div>
@@ -47,33 +47,36 @@ const textArray1 = ref([
 ])
 
 onMounted(() => {
-    gsap.to(".moving-text, .moving-text1", {
-        repeat: -1,
+    gsap.to(".moving-text2, .moving-text3", {
+        repeat: 1,
         ease: "none",
-        duration: 10,
+        duration: 1,
     })
 
-    gsap.to(".moving-text", {
+    gsap.to(".moving-text2", {
         scrollTrigger: {
-            trigger: ".moving-text",
+            trigger: ".moving-text2",
             start: "top +=80%",
             end: "+=200%",
             scrub: 1,
+            // markers: true,
         },
         x: "1500px",
         ease: "none",
     })
 
-    gsap.to(".moving-text1", {
+    gsap.to(".moving-text3", {
         scrollTrigger: {
-            trigger: ".moving-text",
+            trigger: ".moving-text2",
             start: "top +=80%",
             end: "+=200%",
-            scrub: 1,
+            scrub: 2,
+            // markers: true,
         },
         x: "-1500px",
         ease: "none",
     })
+    // });
 })
 </script>
 
@@ -81,8 +84,8 @@ onMounted(() => {
 .black-text {
     font-size: 80px;
     font-weight: 600;
-    color: black;
     white-space: nowrap;
+    color: white;
     transition: all 0.2s;
 
 }
@@ -90,8 +93,8 @@ onMounted(() => {
 .color-text {
     font-size: 80px;
     font-weight: 300;
-    color: black;
     white-space: nowrap;
+    color: white;
     transition: all 0.2s;
 }
 
@@ -125,7 +128,6 @@ onMounted(() => {
 .color-text1:hover {
     white-space: nowrap;
     font-size: 76px;
-    // font-weight: 600;
     color: #3EE9E9;
     text-shadow:
         0px #3EE9E9,

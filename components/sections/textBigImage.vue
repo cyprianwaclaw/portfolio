@@ -1,74 +1,73 @@
 
 <template>
-    <div class="mx-[40px]">
+    <div class="mx-[80px]">
         <div class="flex justify-between">
             <div class="w-[600px]">
-                <p class="text-small">Za każdym produktem stoi idea, <br>idea zmiany, idea innowacji, <br>idea nieustannego
+                <div class="bg-[#D9D9D9] h-[220px] w-[280px] rounded-[22px]" />
+                <p class="text-small mt-[21px]">Za produktem stoi idea, <br>idea zmiany, idea innowacji, <br>idea ciągłego
                     rozwoju
                 </p>
             </div>
-            <div class="mt-[80px] w-[700px] flex place-content-start">
-                <div class="mt-[2px] mr-[25px]">
-                    <Icon name="ph:arrow-right-bold" size="50" class="text-[#49507B] arrowIcon" />
-                </div>
-                <p class="text-big">Każdy projekt to odpowiedź na potrzeby użytkowników, to gotowość do poszukiwania nowych
-                    rozwiązań i przekraczania dotychczasowych granic, by dostarczać wartość, która rzeczywiście robi różnice
+            <div class="-mt-[30px]">
+                <p class="text-big text-end">Każdy projekt to odpowiedź na potrzeby użytkowników
                 </p>
             </div>
-            <div>
-            </div>
         </div>
-        <!-- <div
-            class="background absolute inset-0 bg-[#49507B] flex items-center justify-center text-white text-center text-big">
-            Nowy tekst po zniknięciu ikony
-        </div> -->
+        <div>
+        </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { storeToRefs } from "pinia"
+import { useState } from "@/store/state"
 
-gsap.registerPlugin(ScrollTrigger)
+const { isBlackHeader } = storeToRefs(useState())
+
 onMounted(() => {
-    let tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: ".arrowIcon",
-            start: "center center",
-            end: "+=3500",
-            scrub: true,
-            pin: true,
-        }
-    });
-
-    tl.to(".arrowIcon", {
-        ease: "power1.inOut"
-    }, "=+0.1")
-
-        .to(".arrowIcon", {
-            rotate: 90,
-            duration: 0.5,
-            ease: "power1.inOut"
-        }, "=+0.1")
-
-        .to(".arrowIcon", {
-            duration: 6,
-            scale: 500,
-            x: 35,
-        }, "=+0.5")
-    tl.to(".arrowIcon", {
-        ease: "power1.inOut"
-    }, "=+0.1")
-        .to(".arrowIcon", {
-            duration: 3,
-            opacity: 0,
-            // scale: 0,
-            // display: "none"
-        }, "=+0.1")
-
-    // .set(".arrowIcon", { scale: 0, display: "none" }, "=-0.1")
-
+    isBlackHeader.value = true
+    console.log("fdsdsf")
 })
+
+// import gsap from 'gsap'
+// import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+// gsap.registerPlugin(ScrollTrigger)
+// onMounted(() => {
+//     let tl = gsap.timeline({
+//         scrollTrigger: {
+//             trigger: ".arrowIcon",
+//             start: "center center",
+//             end: "+=1800",
+//             scrub: true,
+//             pin: true,
+//         }
+//     });
+
+//     tl.to(".arrowIcon", {
+//         ease: "power1.inOut"
+//     }, "=+0.1")
+
+//         .to(".arrowIcon", {
+//             rotate: 90,
+//             duration: 0.5,
+//             ease: "power1.inOut"
+//         }, "=+0.1")
+
+//         .to(".arrowIcon", {
+//             duration: 6,
+//             scale: 500,
+//             x: 35,
+//         }, "=+0.5")
+//     tl.to(".arrowIcon", {
+//         ease: "power1.inOut"
+//     }, "=+0.1")
+//         .to(".arrowIcon", {
+//             duration: 0,
+//             opacity: 0,
+//             scale: 1,
+//         }, "=+0.1")
+// })
 </script>
 <style lang="scss" scoped>
 .text-small {
@@ -78,10 +77,11 @@ onMounted(() => {
 }
 
 .text-big {
-    // text-transform: uppercase;
+    text-transform: uppercase;
     white-space: normal;
-    font-size: 38px;
-    font-weight: 400;
+    font-size: 100px;
+    font-weight: 600;
+    // justify-self: left,
 }
 
 .background {

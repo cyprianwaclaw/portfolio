@@ -1,11 +1,5 @@
 <template>
-    <div class="relative w-full h-screen flex justify-center items-center flex-col -pt-[120px]">
-        <!-- <div class="elipse" ref="frame">
-        </div> -->
-                <!-- <img src="/images/img.webp" /> -->
-      <!-- <img :src="imgUrl" /> -->
-                    <!-- <img src="/13.jpg" /> -->
-
+    <div class="relative w-full h-screen flex justify-center items-center flex-col bg-white bg-new-white">
         <div class="justify-start">
             <h2 class="font-semibold text-[31px]">My name is</h2>
             <h1 class="font-semibold text-[100px] -mt-[16px] tracking-[4px]">CYPRIAN WACŁAW</h1>
@@ -43,10 +37,15 @@
 
 
 <script lang="ts" setup>
-import gsap from 'gsap';
-// import imgUrl from '/images/img.webp';
+import gsap from 'gsap'
+import { storeToRefs } from "pinia"
+import { useState } from "@/store/state"
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const frame = ref()
+const { isBlackHeader, isBgBlack } = storeToRefs(useState())
+
+gsap.registerPlugin(ScrollTrigger);
+
 
 const linkMenuArray = reactive([
     { name: "Instagram", link: "/" },
@@ -62,18 +61,74 @@ const linkMenuArray1 = reactive([
 
 const toggleClick = () => { }
 
+// onMounted(() => {
+
+//     // isBlackHeader.value = true
+//     // isBgBlack.value = fals
+
+//     gsap.fromTo(
+//         '.bg-new-white',
+//         {},
+//         {
+//             // background: 'white',
+//             // y: 0,
+//             // duration: 5,
+//             // ease: "cubic-bezier(.64,.4,.4,.64)",
+//             scrollTrigger: {
+//                 trigger: ".bg-new-white",
+//                 start: "top center",
+//                 // end: "top 15%",
+//                 scrub: true,
+//                 markers: true,
+//             },
+//             onUpdate: () => {
+//                 isBlackHeader.value = !isBlackHeader.value;
+                // isBgBlack.value = !isBgBlack.value
+//             }
+//         }
+//     );
+
+// })
+
 onMounted(() => {
-    gsap.to(frame.value, {
-        rotate: 360,  // Obrót o 360 stopni
-        duration: 60,  // Czas trwania jednego obrotu
-        repeat: -1,   // Powtarzanie animacji w nieskończoność
-        ease: "linear"  // Płynne, stałe tempo animacji
-    });
-})
+    gsap.fromTo(
+        '.bg-new-white',
+        {},
+        {
+            scrollTrigger: {
+                trigger: ".bg-new-white",
+                start: "top 10%",
+                scrub: true,
+                // markers: true,
+                onEnter: () => { // Wyzwala, gdy element wchodzi na ekran
+                    isBlackHeader.value = true;
+                    isBgBlack.value = false
+                },
+                onLeave: () => { // Wyzwala, gdy element znika z ekranu
+                    isBlackHeader.value = false;
+                    isBgBlack.value = true
+                },
+                onEnterBack: () => { // Wyzwala, gdy element wraca na ekran
+                    isBlackHeader.value = true;
+                    isBgBlack.value = false
+                },
+                onLeaveBack: () => { // Wyzwala, gdy element znika podczas przewijania wstecz
+                    isBlackHeader.value = false;
+                    isBgBlack.value = true
+                },
+            }
+        }
+    );
+});
 
 </script>
 
 <style lang='scss' scoped>
+.bg-new-white {
+    transform: translateY(-71vh);
+    background: white
+}
+
 .elipse {
     width: 800px;
     height: 800px;

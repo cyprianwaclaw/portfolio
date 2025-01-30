@@ -2,10 +2,11 @@
     <div>
         <NavsOpenMenu :modalActive="isOpen" />
         <div class="p-9 flex w-full justify-between items-center fixed z-50">
-            <p @click="goToHome" class="text-xl tracking-wider elementToAnimate">CYPRIAN WACŁAW</p>
+            <p @click="goToHome" class="text-xl tracking-wider  elementToAnimate"
+                :class="isBlackHeader === true ? 'blackText' : 'whiteText'">CYPRIAN WACŁAW</p>
             <div class="flex items-center gap-10">
-                <div class="w-[100px] border elementToAnimate rounded-full">
-                    <ButtonsAnimation v-if="textColor === 'white'" @clickButton="toggleMenu" text="CLOSE"
+                <div class="w-[100px] elementToAnimate" :class="isBlackHeader === true ? 'border-black' : 'border-white'">
+                    <ButtonsAnimation v-if="isOpen === true" @clickButton="toggleMenu" text="CLOSE"
                         :textColor="textColor" />
                     <ButtonsAnimation v-else @clickButton="toggleMenu" text="MENU" :textColor="textColor" />
                 </div>
@@ -15,12 +16,14 @@
 </template>
 
 <script lang="ts" setup>
-import gsap from 'gsap';
+import { storeToRefs } from "pinia"
+import { useState } from "@/store/state"
 
 const isOpen = ref(false);
 const textColor = ref('black');
 
-let timeline = ref() as any;
+const { isBlackHeader } = storeToRefs(useState())
+
 
 const goToHome = () => {
     useRouter().push('/');
@@ -30,49 +33,45 @@ const toggleMenu = () => {
     isOpen.value = !isOpen.value;
 
     if (isOpen.value) {
-        playAnimation()
         setTimeout(() => {
-            textColor.value = 'white'
+            isBlackHeader.value = false
         }, 450)
     } else {
         setTimeout(() => {
-            textColor.value = 'black'
+            isBlackHeader.value = true
         }, 1000);
-        setTimeout(() => {
-            reverseAnimation();
-        }, 700);
     }
 }
 
-const playAnimation = () => {
-    gsap.to('.elementToAnimate', {
-        color: 'white',
-        borderColor: 'white',
-        ease: 'power2.out'
-    });
-};
-
-const reverseAnimation = () => {
-    gsap.to('.elementToAnimate', {
-        color: 'black',
-        borderColor: 'black',
-        ease: 'power2.out'
-    });
-};
-
-onMounted(() => {
-    timeline.value = gsap.timeline({ paused: true });
-    timeline.value.fromTo(
-        '.elementToAnimate',
-        { color: 'black', borderColor: 'black' },
-        { color: 'white', borderColor: 'white' }
-    );
-});
+watch(isBlackHeader, (newValue) => {
+    if (newValue === true) {
+        textColor.value = 'black'
+    } else {
+        textColor.value = 'white'
+    }
+})
 </script>
 
 <style scoped>
 .elementToAnimate {
-    transition: color 0.5s, border-color 0.5s;
-    /* border: 1px solid black; */
+    transition: all 0.3s, border-color 0.3s;
+}
+
+.blackText {
+    color: black;
+}
+
+.whiteText {
+    color: white !important;
+}
+
+.border-black {
+    border: 1px solid black;
+    border-radius: 100px;
+}
+
+.border-white {
+    border: 1px solid white;
+    border-radius: 100px;
 }
 </style>

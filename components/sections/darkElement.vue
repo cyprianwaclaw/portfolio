@@ -1,90 +1,89 @@
-
 <template>
-    <div class="mx-[40px] trigger-action -mt-[1000px]">
-        <p class="text-[50px] text-white">
-            dasdadasds
-        </p>
-        <!-- <div class="flex justify-between">
-            <div class="w-[600px]">
-                <p class="text-small">Za każdym produktem stoi idea, <br>idea zmiany, idea innowacji, <br>idea nieustannego
-                    rozwoju
-                </p>
-            </div>
-            <div class="mt-[80px] w-[700px] flex place-content-start">
-                <div class="mt-[2px] mr-[25px]">
-                    <Icon name="ph:arrow-right-bold" size="50" class="text-[#49507B] arrowIcon" />
+    <div class="relative w-full h-screen flex justify-center items-center flex-col -pt-[120px]">
+        <div class="justify-start">
+            <h2 class="font-semibold text-[31px]">My name is</h2>
+            <h1 class="font-semibold text-[100px] -mt-[16px] tracking-[4px]">CYPRIAN WACŁAW</h1>
+            <div class="flex place-items-center mt-[21px]">
+                <div class="z-10 -mr-16">
+                    <p class="text-[42px]">I create digital</p>
+                    <p class="text-[55px] font-semibold -mt-[20px] ml-[113px]">experiences</p>
                 </div>
-                <p class="text-big">Każdy projekt to odpowiedź na potrzeby użytkowników, to gotowość do poszukiwania nowych
-                    rozwiązań i przekraczania dotychczasowych granic, by dostarczać wartość, która rzeczywiście robi różnice
+                <div class="bg-[#D9D9D9] h-[270px] w-[450px] rounded-[22px]" />
+                <div class="z-10 ml-[28px]">
+                    <p class="text-[42px]">that define</p>
+                    <p class="text-[55px] font-semibold -mt-[20px]">new reality</p>
+                </div>
+            </div>
+        </div>
+        <div class="flex absolute bottom-1  left-[28px] gap-[21px] place-items-center">
+            <div v-for="(item, index) in linkMenuArray" :key="index" class="my-[45px]">
+                <p class="links-menu">
+                    {{ item.name }}
                 </p>
             </div>
-            <div>
-            </div> -->
         </div>
-        <!-- <div
-            class="background absolute inset-0 bg-[#49507B] flex items-center justify-center text-white text-center text-big">
-            Nowy tekst po zniknięciu ikony
-        </div> -->
-    <!-- </div> -->
+        <div class="flex absolute bottom-2 right-[28px]  gap-[21px] place-items-center">
+            <div class="w-[145px]">
+                <ButtonsAnimation @clickButton="toggleClick" text="LETS TALK" bgColor="#3EE9E9" />
+            </div>
+            <div v-for="(item, index) in linkMenuArray1" :key="index" class="my-[45px]">
+                <p class="links-menu">
+                    {{ item.name }}
+                </p>
+            </div>
+        </div>
+    </div>
 </template>
 
+
 <script lang="ts" setup>
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+const linkMenuArray = reactive([
+    { name: "Instagram", link: "/" },
+    { name: "Behance", link: "/" },
+    { name: "Linkedin", link: "/" },
+    { name: "GitHub", link: "/" },
+])
 
-gsap.registerPlugin(ScrollTrigger);
+const linkMenuArray1 = reactive([
+    { name: "About", link: "/" },
+    { name: "Projects", link: "/" },
+])
 
-onMounted(() => {
-    let tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: ".trigger-action",
-            start: "center center",
-            // end: "+=1500",
-            scrub: true,
-            // pin: true,
-        }
-    });
+const toggleClick = () => { }
 
-    tl.to(".arrowIcon", {
-        ease: "power1.inOut"
-    }, "=+0.1")
 
-        .to(".arrowIcon", {
-            rotate: 90,
-            duration: 1,
-            ease: "power1.inOut"
-        }, "=+1")
-
-        .to(".arrowIcon", {
-            duration: 10,
-            scale: 500,
-            x: 35,
-        }, "=+0.1")
-        .to(".arrowIcon", {
-            duration: 3,
-            opacity: 0
-        }, "=+0.1")
-        .set(".arrowIcon", { scale: 1, }) // Ukrycie ikony
-    // .set(".arrowIcon", { opacity: 0 }) // Ukrycie ikony
-
-})
 </script>
-<style lang="scss" scoped>
-.text-small {
+
+<style lang='scss' scoped>
+.links-menu {
+    color: #313131c0;
     text-transform: uppercase;
     font-size: 19px;
-    font-weight: 400;
+    transition: color 0.34s;
 }
 
-.text-big {
-    // text-transform: uppercase;
-    white-space: normal;
-    font-size: 38px;
-    font-weight: 400;
+.links-menu:hover {
+    color: #000000;
+    cursor: pointer;
+    transition: color 0.2s;
 }
 
-.background {
-    background: #49507B;
-    display: none;
+.custom-shadow {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+.div-block-3 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.text-block-3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 </style>

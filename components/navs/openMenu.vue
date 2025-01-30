@@ -9,7 +9,8 @@
                     </div>
                 </div>
                 <div class="image-wrapper">
-                    <img src="/13.jpg" />
+                    <img src="/13.jpg" class="header-image"/>
+                       <!-- <img src="/images/img.webp" /> -->
                 </div>
                 <!-- <div class="img-container1">
                     <div class="img-container">
@@ -94,7 +95,7 @@ const createTimeline = () => {
                 duration: 0.1,
             }, '>-0.4')
         .fromTo(
-            'img',
+            '.header-image',
             {
                 clipPath: 'inset(100% 0 0 0)',
                 scale: 1.2
