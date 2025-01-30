@@ -240,11 +240,11 @@ const goTo = (link: any) => {
     height: auto;
 }
 
-img {
-    display: block;
-    width: 400px;
-    height: auto;
-}
+// img {
+//     display: block;
+//     width: 400px;
+//     height: auto;
+// }
 
 .img-container1 {
     width: 1440px;
