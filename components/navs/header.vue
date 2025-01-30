@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NavsOpenMenu :modalActive="isOpen" />
+        <NavsOpenMenu1 :modalActive="isOpen" />
         <div class="p-9 flex w-full justify-between items-center fixed z-50">
             <p @click="goToHome" class="text-xl tracking-wider  elementToAnimate"
                 :class="isBlackHeader === true ? 'blackText' : 'whiteText'">CYPRIAN WACŁAW</p>
@@ -33,17 +33,19 @@ const toggleMenu = () => {
     isOpen.value = !isOpen.value;
 
     if (isOpen.value) {
-        setTimeout(() => {
-            isBlackHeader.value = false
-        }, 450)
+        // setTimeout(() => {
+        isBlackHeader.value = false
+        // }, 40)
     } else {
         setTimeout(() => {
-            isBlackHeader.value = true
+        isBlackHeader.value = true
         }, 1000);
     }
 }
 
 watch(isBlackHeader, (newValue) => {
+    console.log(newValue)
+
     if (newValue === true) {
         textColor.value = 'black'
     } else {

@@ -2,7 +2,7 @@
     <div class="black-container">
         <div class="mx-[200px]">
             <div class="text-container">
-                <p class="animated-text">Projekty</p>
+                <p class="animated-text1">Projekty</p>
             </div>
 
             <div class="mt-[120px] image-section">
@@ -48,7 +48,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 onMounted(() => {
     gsap.fromTo(
-        '.animated-text',
+        '.animated-text1',
         { y: 150 },
         {
             y: 0,
@@ -107,7 +107,7 @@ onMounted(() => {
     position: relative;
 }
 
-.animated-text {
+.animated-text1 {
     font-size: 130px;
     color: white;
     font-weight: 500;
