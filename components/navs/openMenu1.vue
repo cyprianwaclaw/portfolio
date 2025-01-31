@@ -7,20 +7,21 @@
                 </div>
             </div>
             <div class="flex flex-col gap-[10px]">
-                <!-- {{ router.currentRoute.value.fullPath }} -->
                 <div class="text-container relative" v-for="(item, index) in mainMenuArray" :key="index">
                     <div class="flex place-items-center gap-[21px] animated-text">
-                        <svg :class="router.currentRoute.value.fullPath == item.link ? 'fill-[#3EE9E9]' : 'fill-[#49507B]'" width="65" height="65" viewBox="0 0 62 62" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                        d="M50.3362 24.9857H37.4131V12.0703H24.4997V24.9857H11.5862V37.9011H24.5036V50.8184H37.417V37.8972H50.3343L50.3362 24.9857Z"
-                        fill="" />
-                    </svg>
-                    <h1 class="header-title-text text-center" @click="goTo(item.link)">
-                        {{ item.name }}
-                        <!-- <span class="underline">czxcxzcxz</span> -->
-                    </h1>
-                </div>
+                        <!-- {{ routeName }}
+                        {{ router.currentRoute.value.fullPath }} -->
+                        <svg class="svg-icon-menu-plus"
+                            :class="router.currentRoute.value.fullPath == item.link ? 'fill-[#3EE9E9]' : 'fill-[#49507B]'"
+                            width="65" height="65" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M50.3362 24.9857H37.4131V12.0703H24.4997V24.9857H11.5862V37.9011H24.5036V50.8184H37.417V37.8972H50.3343L50.3362 24.9857Z"
+                                fill="" />
+                        </svg>
+                        <h1 class="header-title-text text-center" @click="goTo(item.link)">
+                            {{ item.name }}
+                        </h1>
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,7 +33,7 @@ import { gsap } from "gsap"
 
 const router = useRouter()
 let timeline = ref(null) as any
-
+let timeline1 = ref(null) as any
 const props = defineProps({
     modalActive: {
         type: Boolean,
@@ -40,6 +41,12 @@ const props = defineProps({
     },
 })
 
+const emits = defineEmits(['closeMenu'])
+
+const goTo = (link: string) => {
+    router.push(link)
+    emits("closeMenu")
+}
 const mainMenuArray = reactive([
     { name: "Index", link: "/" },
     { name: "Portfolio", link: "/portfolio" },
@@ -63,32 +70,22 @@ const createTimeline = () => {
         .fromTo(".line-menu", { opacity: 0 }, { opacity: 1, duration: 0.3 }, ">")
 }
 
+// const timelineActiveMenu = () => {
+//     timeline1 = gsap.timeline({ paused: true })
+//     timeline1
+//         .to(".svg-icon-menu-plus", { opacity: 0, duration: 0.1 })
+//         .to(".svg-icon-menu-plus", { opacity: 1, duration: 0.1 })
+// }
+
 onMounted(() => {
     createTimeline()
-
-    // document.querySelectorAll(".animated-text").forEach(text => {
-    //     const underline = text.querySelector(".underline")
-
-    //     // gsap.set(underline, { scaleX: 0, transformOrigin: "left center" })
-
-    //     text.addEventListener("mouseenter", () => {
-    //         // gsap.to(underline, { scaleX: 1, duration: 0.4, ease: "power2.out" })
-    //         gsap.to(text, { color: "#3EE9E9", duration: 0.1 })
-    //     })
-    //     text.addEventListener("mouseleave", () => {
-    //         // gsap.to(underline, { scaleX: 0, duration: 0.4, ease: "power2.out" })
-    //         gsap.to(text, { color: "#ffffff", duration: 0.1 })
-    //     })
-    // })
+    // timelineActiveMenu()
 })
 
 watch(props, newValue => {
     newValue.modalActive ? playAnimation(timeline) : reverseAnimation(timeline)
 })
 
-const goTo = (link: string) => {
-    router.push(link)
-}
 </script>
 
 <style lang="scss" scoped>
@@ -121,8 +118,8 @@ const goTo = (link: string) => {
     transition: color 0.3s ease;
 
     &:hover {
-    color: #3EE9E9;
-}
+        color: #3EE9E9;
+    }
 }
 
 
@@ -138,16 +135,16 @@ const goTo = (link: string) => {
 //     transition: transform 0.4s ease;
 // }
 
-.animated-text:hover .underline {
-    transform: scaleX(1);
-}
+// .animated-text:hover .underline {
+//     transform: scaleX(1);
+// }
 
 .links-menu {
     color: #c5c9e08a;
     text-transform: uppercase;
     font-size: 19px;
-transition: all 0.1s ease-in-out;
-    /* Usunięcie hover dla links-menu */
+    transition: all 0.1s ease-in-out;
+
     &:hover {
         color: white;
         cursor: pointer;

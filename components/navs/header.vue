@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NavsOpenMenu1 :modalActive="isOpen" />
+        <NavsOpenMenu1 :modalActive="isOpen" @closeMenu="toggleMenu"/>
         <div class="p-9 flex w-full justify-between items-center fixed z-50">
             <p @click="goToHome" class="text-xl tracking-wider  elementToAnimate"
                 :class="isBlackHeader === true ? 'blackText' : 'whiteText'">CYPRIAN WACŁAW</p>
