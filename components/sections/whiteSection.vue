@@ -38,11 +38,7 @@
 
 <script lang="ts" setup>
 import gsap from 'gsap'
-import { storeToRefs } from "pinia"
-import { useState } from "@/store/state"
 import ScrollTrigger from 'gsap/ScrollTrigger'
-
-const { isBlackHeader, isBgBlack } = storeToRefs(useState())
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -60,66 +56,6 @@ const linkMenuArray1 = reactive([
 ])
 
 const toggleClick = () => { }
-
-// onMounted(() => {
-
-//     // isBlackHeader.value = true
-//     // isBgBlack.value = fals
-
-//     gsap.fromTo(
-//         '.bg-new-white',
-//         {},
-//         {
-//             // background: 'white',
-//             // y: 0,
-//             // duration: 5,
-//             // ease: "cubic-bezier(.64,.4,.4,.64)",
-//             scrollTrigger: {
-//                 trigger: ".bg-new-white",
-//                 start: "top center",
-//                 // end: "top 15%",
-//                 scrub: true,
-//                 markers: true,
-//             },
-//             onUpdate: () => {
-//                 isBlackHeader.value = !isBlackHeader.value;
-// isBgBlack.value = !isBgBlack.value
-//             }
-//         }
-//     );
-
-// })
-
-onMounted(() => {
-    // gsap.fromTo(
-    //     '.bg-new-white',
-    //     {},
-    //     {
-    //         scrollTrigger: {
-    //             trigger: ".bg-new-white",
-    //             start: "top 10%",
-    //             scrub: true,
-    //             // markers: true,
-    //             // onEnter: () => { // Wyzwala, gdy element wchodzi na ekran
-    //             //     isBlackHeader.value = true;
-    //             //     isBgBlack.value = false
-    //             // },
-    //             // onLeave: () => { // Wyzwala, gdy element znika z ekranu
-    //             //     isBlackHeader.value = false;
-    //             //     isBgBlack.value = true
-    //             // },
-    //             // onEnterBack: () => { // Wyzwala, gdy element wraca na ekran
-    //             //     isBlackHeader.value = true;
-    //             //     isBgBlack.value = false
-    //             // },
-    //             // onLeaveBack: () => { // Wyzwala, gdy element znika podczas przewijania wstecz
-    //             //     isBlackHeader.value = false;
-    //             //     isBgBlack.value = true
-    //             // },
-    //         }
-    //     }
-    // );
-});
 
 </script>
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NavsOpenMenu1 :modalActive="isOpen" @closeMenu="toggleMenu" />
+        <NavsOpenMenu :modalActive="isOpen" @closeMenu="toggleMenu" />
         <div class="p-9 flex w-full justify-between items-center fixed z-50">
             <p @click="goToHome" class="text-xl tracking-wider  elementToAnimate"
                 :class="isBlackHeader === true ? 'blackText' : 'whiteText'">CYPRIAN WACŁAW</p>
@@ -22,13 +22,12 @@ import { useState } from "@/store/state"
 const isOpen = ref(false);
 const textColor = ref('black');
 
-const { isBlackHeader, isBgBlack } = storeToRefs(useState())
-
+const { isBlackHeader } = storeToRefs(useState())
 
 
 const goToHome = () => {
-    useRouter().push('/');
-};
+    useRouter().push('/')
+}
 
 const toggleMenu = () => {
     isOpen.value = !isOpen.value;
@@ -36,10 +35,8 @@ const toggleMenu = () => {
     if (isOpen.value) {
         setTimeout(() => {
             isBlackHeader.value = false
-            // isBgBlack.value = false
         }, 40)
     } else {
-        // isBgBlack.value = false
         setTimeout(() => {
             isBlackHeader.value = true
         }, 1000);

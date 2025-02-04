@@ -1,11 +1,5 @@
 <template>
     <div class="relative w-full h-screen flex justify-center items-center flex-col -pt-[120px]">
-        <!-- <div class="elipse" ref="frame">
-        </div> -->
-                <!-- <img src="/images/img.webp" /> -->
-      <!-- <img :src="imgUrl" /> -->
-                    <!-- <img src="/13.jpg" /> -->
-
         <div class="justify-start">
             <h2 class="font-semibold text-[31px]">My name is</h2>
             <h1 class="font-semibold text-[100px] -mt-[16px] tracking-[4px]">CYPRIAN WACŁAW</h1>
@@ -22,7 +16,7 @@
             </div>
         </div>
         <div class="flex absolute bottom-1  left-[28px] gap-[21px] place-items-center">
-            <div v-for="(item, index) in linkMenuArray" :key="index" class="my-[45px]">
+            <div v-for="(item, index) in linkMenuSocialArray" :key="index" class="my-[45px]">
                 <p class="links-menu">
                     {{ item.name }}
                 </p>
@@ -32,7 +26,7 @@
             <div class="w-[145px]">
                 <ButtonsAnimation @clickButton="toggleClick" text="LETS TALK" bgColor="#3EE9E9" />
             </div>
-            <div v-for="(item, index) in linkMenuArray1" :key="index" class="my-[45px]">
+            <div v-for="(item, index) in linkMenuArray" :key="index" class="my-[45px]">
                 <p class="links-menu">
                     {{ item.name }}
                 </p>
@@ -44,32 +38,20 @@
 
 <script lang="ts" setup>
 import gsap from 'gsap';
-// import imgUrl from '/images/img.webp';
 
-const frame = ref()
-
-const linkMenuArray = reactive([
+const linkMenuSocialArray = reactive([
     { name: "Instagram", link: "/" },
     { name: "Behance", link: "/" },
     { name: "Linkedin", link: "/" },
     { name: "GitHub", link: "/" },
 ])
 
-const linkMenuArray1 = reactive([
+const linkMenuArray = reactive([
     { name: "About", link: "/" },
     { name: "Projects", link: "/" },
 ])
 
 const toggleClick = () => { }
-
-onMounted(() => {
-    gsap.to(frame.value, {
-        rotate: 360,  // Obrót o 360 stopni
-        duration: 60,  // Czas trwania jednego obrotu
-        repeat: -1,   // Powtarzanie animacji w nieskończoność
-        ease: "linear"  // Płynne, stałe tempo animacji
-    });
-})
 
 </script>
 

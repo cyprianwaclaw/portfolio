@@ -1,5 +1,5 @@
 <template>
-    <div class="black-container bg-new-white11223">
+    <div class="black-container">
         <div class="mx-[200px]">
             <div class="text-container">
                 <p class="animated-text1">Projekty</p>
@@ -53,7 +53,7 @@ gsap.registerPlugin(ScrollTrigger);
 onMounted(() => {
 
     gsap.fromTo(
-        '.bg-new-white11223',
+        '.black-container',
         {
             opacity: 0,
             duration: 0,
@@ -63,30 +63,23 @@ onMounted(() => {
             opacity: 1,
             duration: 0,
             scrollTrigger: {
-                trigger: ".bg-new-white11223",
-                // start: "top 0%",
+                trigger: ".black-container",
                 start: "top-=14%",
-                // start: "top 38%", // Animacja zaczyna się 20% przed głównym elementem
-                // end: "top 30%", // Opcjonal
                 scrub: true,
-                markers: true,
-                // onUpdate: () => {
-                //     isBlackHeader.value = false
-                //     isBgBlack.value = !isBgBlack.value
-                // }
-                onEnter: () => { // Wyzwala, gdy element wchodzi na ekran
+                // markers: true,
+                onEnter: () => {
                     isBlackHeader.value = false
                     isBgBlack.value = true
                 },
-                onLeave: () => { // Wyzwala, gdy element znika z ekranu
+                onLeave: () => {
                     isBlackHeader.value = true
                     isBgBlack.value = false
                 },
-                onEnterBack: () => { // Wyzwala, gdy element wraca na ekran
+                onEnterBack: () => {
                     isBlackHeader.value = false
                     isBgBlack.value = true
                 },
-                onLeaveBack: () => { // Wyzwala, gdy element znika podczas przewijania wstecz
+                onLeaveBack: () => {
                     isBlackHeader.value = true
                     isBgBlack.value = false
                 },
@@ -115,7 +108,6 @@ onMounted(() => {
             trigger: ".image-section",
             start: "top 80%",
             end: "bottom 80%",
-            // markers: true,
             scrub: true
         }
     });
@@ -146,12 +138,6 @@ onMounted(() => {
 .black-container {
     transform: translateY(-70vh);
 }
-
-// .bg-new-white11223 {
-//     // transform: translateY(-71vh);
-//     // background: rgb(0, 0, 0)
-// }
-
 .text-container {
     overflow: hidden;
     width: 500px;

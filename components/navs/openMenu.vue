@@ -1,47 +1,38 @@
 <template>
     <div class="bg">
-        <div class="w-full flex flex-col relative justify-center ">
-            <div class="menu-section-container">
-                <div class="flex flex-col gap-[25px] w-full">
-                    <div class="text-container relative" v-for="(item, index) in mainMenuArray " :key="index">
-                        <h1 class="animated-text" @click="goTo(item.link)">{{ item.name }}</h1>
-                        <div class="underline"></div>
-                    </div>
-                </div>
-                <div class="image-wrapper">
-                    <img src="/13.jpg" class="header-image"/>
-                       <!-- <img src="/images/img.webp" /> -->
-                </div>
-                <!-- <div class="img-container1">
-                    <div class="img-container">
-                        <img src="/13.jpg" />
-                        <div class="retangle">
-                    </div>
-                </div> -->
-                <div class="flex w-full justify-end">
-                    <Icon name="ph:arrow-right-bold" size="38" class="text-[#3EE9E9] mr-3 -mt-2.5" />
-                    <p class="text-[21px] text-white w-[240px]">DESIGN IS THE PROCESS OF TRANSFORMING VISION INTO REALITY
-                    </p>
+        <div class="flex w-full justify-between">
+            <div class="flex justify-end flex-col gap-[5px] line-menu">
+                <div v-for="(item, index) in linkMenuArray" :key="index">
+                    <p class="links-menu">{{ item.name }}</p>
                 </div>
             </div>
-        </div>
-        <div class="line-menu">
-            <div v-for="(item, index) in linkMenuArray" :key="index" class="mt-[32px]">
-                <p class="links-menu">
-                    {{ item.name }}
-                </p>
+            <div class="flex flex-col gap-[10px]">
+                <div class="text-container relative" v-for="(item, index) in mainMenuArray" :key="index">
+                    <div class="flex place-items-center gap-[21px] animated-text">
+                        <!-- {{ routeName }}
+                        {{ router.currentRoute.value.fullPath }} -->
+                        <svg class="svg-icon-menu-plus"
+                            :class="router.currentRoute.value.fullPath == item.link ? 'fill-[#3EE9E9]' : 'fill-[#49507B]'"
+                            width="65" height="65" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M50.3362 24.9857H37.4131V12.0703H24.4997V24.9857H11.5862V37.9011H24.5036V50.8184H37.417V37.8972H50.3343L50.3362 24.9857Z"
+                                fill="" />
+                        </svg>
+                        <h1 class="header-title-text text-center" @click="goTo(item.link)">
+                            {{ item.name }}
+                        </h1>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- </div> -->
 </template>
 
-<script lang="ts" setup>
-import { gsap } from 'gsap'
+<script setup lang="ts">
+import gsap from 'gsap'
 
 const router = useRouter()
 let timeline = ref(null) as any
-
 const props = defineProps({
     modalActive: {
         type: Boolean,
@@ -49,6 +40,12 @@ const props = defineProps({
     },
 })
 
+const emits = defineEmits(['closeMenu'])
+
+const goTo = (link: string) => {
+    router.push(link)
+    emits("closeMenu")
+}
 const mainMenuArray = reactive([
     { name: "Index", link: "/" },
     { name: "Portfolio", link: "/portfolio" },
@@ -63,245 +60,70 @@ const linkMenuArray = reactive([
     { name: "GitHub", link: "/" },
 ])
 
-
 const createTimeline = () => {
     timeline = gsap.timeline({ paused: true })
     timeline
-        .set('.bg', { display: 'flex' })
-        // .to('.img-container1', { visibility: "visible"  })
-
-        .fromTo('.bg',
-            {
-                y: '-100%',
-            },
-            { y: 0, duration: 0.8, ease: "cubic-bezier(.64,.4,.4,.64)", }
-        )
-        .fromTo(
-            '.animated-text',
-            {
-                y: 100,
-            },
-            {
-                y: 0,
-                duration: 0.4,
-                ease: "cubic-bezier(.64,.4,.4,.64)"
-            }, '>-0.1'
-        )
-        .fromTo('.line-menu', {
-            opacity: 0
-        },
-            {
-                opacity: 1,
-                duration: 0.1,
-            }, '>-0.4')
-        .fromTo(
-            '.header-image',
-            {
-                clipPath: 'inset(100% 0 0 0)',
-                scale: 1.2
-            },
-            {
-                clipPath: 'inset(0% 0 0 0)',
-                scale: 1,
-                duration: 0.6,
-                ease: "cubic-bezier(.64,.4,.4,.64)"
-            }, '>-0.3'
-        )
-        // .to('.img-container1', { visibility: "visible" })
-        // .to(
-        //     // '.retangle',
-        //     '.img-container::after',
-        //     {
-        //         width: '0%',
-        //         duration: 0.4,
-        //         ease: "cubic-bezier(.64,.4,.4,.64)"
-        //     }, '>-0.4'
-        // )
-        .set('.underline', { display: 'flex' })
+        .set(".bg", { display: "flex" })
+        .fromTo(".bg", { y: "-100%" }, { y: 0, duration: 0.64, ease: "cubic-bezier(.64,.4,.4,.64)" })
+        .fromTo(".animated-text", { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 0.32, ease: "cubic-bezier(.64,.4,.4,.64)" }, ">-0.1")
+        .fromTo(".line-menu", { opacity: 0 }, { opacity: 1, duration: 0.3 }, ">")
 }
 
 
 onMounted(() => {
     createTimeline()
-
-    // const textElement = document.querySelector('.animated-text') as HTMLElement;
-
-    document.querySelectorAll('.text-container').forEach(container => {
-        const underline = container.querySelector('.underline')
-        // const text = container.querySelector('.animated-text') as any
-        // console.log('Offset width:', textElement.offsetWidth);
-        gsap.set(underline, { width: 300, scaleX: 0, transformOrigin: 'left center' })
-
-        container.addEventListener('mouseenter', () => {
-            gsap.to(underline, { scaleX: 1, duration: 0.4, ease: "power2.out" })
-        })
-        container.addEventListener('mouseleave', () => {
-            gsap.to(underline, { scaleX: 0, duration: 0.4, ease: "power2.out" })
-        })
-    })
 })
 
-watch(props, (newValue: any) => {
+watch(props, newValue => {
     newValue.modalActive ? playAnimation(timeline) : reverseAnimation(timeline)
 })
-
-
-const goTo = (link: any) => {
-    router.push(link)
-    // reverseAnimation(timeline)
-}
-
 
 </script>
 
 <style lang="scss" scoped>
 .bg {
-    padding: 40px;
+    padding: 80px;
     position: fixed;
     background: #49507B;
     height: 100vh;
     width: 100%;
     z-index: 50;
     display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .text-container {
     overflow: hidden;
-    width: 400px;
-    height: 100px;
+    width: 100%;
+    height: 124px;
 }
 
-.animated-text {
-    font-size: calc(30px + 3vw);
-    line-height: normal;
+.header-title-text {
+    font-size: 110px;
+    font-weight: 500;
     color: #ffffff;
     cursor: pointer;
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: #3EE9E9;
+    }
 }
 
-.line-menu {
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
-    gap: 42px;
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 28px;
-    width: 100%;
-}
 
 .links-menu {
     color: #c5c9e08a;
     text-transform: uppercase;
     font-size: 19px;
-    transition: color 0.34s;
-}
+    transition: all 0.1s ease-in-out;
 
-.links-menu:hover {
-    color: #ffffffdc;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-.menu-section-container {
-    display: flex;
-    width: 100%;
-    padding: 0px 120px;
-    margin-top: -21px;
-}
-
-.retangle-container {
-    margin-left: 72px;
-    height: calc(100vh - 400px);
-    width: 100%;
-    background: rgb(156, 37, 37);
-    border-radius: 23px;
-}
-
-.retangle {
-    width: 100%;
-    background: white;
-    border-radius: 23px;
-}
-
-.underline {
-    width: 100%;
-    height: 3px;
-    background-color: #3EE9E9;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    transform-origin: left;
-    transform: scaleX(0);
-    display: none;
-}
-
-.image-wrapper {
-    overflow: hidden;
-    width: 100%;
-    height: auto;
-}
-
-// img {
-//     display: block;
-//     width: 400px;
-//     height: auto;
-// }
-
-.img-container1 {
-    width: 1440px;
-    margin: 0 auto;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    visibility: hidden;
-}
-
-.img-container {
-    width: 1440px;
-    height: 960px;
-    position: relative;
-    overflow: hidden;
-
-    &:after {
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background: #fff;
-        top: 0;
-        right: 0;
-    }
-
-    img {
-        width: 1440px;
-        margin: 0 auto;
+    &:hover {
+        color: white;
+        cursor: pointer;
     }
 }
-
-// .img-container {
-//     // width: 1440px;
-//     // height: 960px;
-//     // margin-left: 72px;
-//     height: calc(100vh - 400px);
-//     width: 100%;
-//     position: relative;
-//     overflow: hidden;
-
-//     &:after {
-//         content: '';
-//         position: absolute;
-//         width: 100%;
-//         height: 100%;
-//         top: 0;
-//         right: 0;
-//         background: #3EE9E9;
-//         // background: transparent
-//     }
-
-//     img {
-//         height: 100%;
-//         position: absolute;
-//     }
-// }
 </style>
-
-

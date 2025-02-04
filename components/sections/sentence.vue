@@ -26,11 +26,7 @@
 
 <script lang="ts" setup>
 import gsap from 'gsap'
-import { storeToRefs } from "pinia"
-import { useState } from "@/store/state"
 import ScrollTrigger from 'gsap/ScrollTrigger'
-
-const { isBlackHeader, isBgBlack } = storeToRefs(useState())
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,13 +52,6 @@ onMounted(() => {
         .to(".iconChange", { x: '50%', duration: 500, ease: "power2.out" })
         .to(".iconClass", {
             scale: 100, duration: 700,
-            // onLeaveBack: () => { // Wyzwala, gdy element znika podczas przewijania wstecz
-            //     // setTimeout(() => {
-            //         isBlackHeader.value = true
-            //         isBgBlack.value = false
-            //         // isBlackHeader.value = true
-            //     // }, 1000);
-            // },
         }, "<60%")
         .to(".iconClass", { display: "none" });
 });

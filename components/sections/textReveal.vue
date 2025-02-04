@@ -53,8 +53,6 @@ onMounted(() => {
     color: #d5d5d5b2;
     line-height: 65px;
     word-wrap: break-word;
-    /* Zawijanie słów, gdy są zbyt długie */
     white-space: normal;
-    /* Umożliwia przechodzenie tekstu do nowej linii */
 }
 </style>
