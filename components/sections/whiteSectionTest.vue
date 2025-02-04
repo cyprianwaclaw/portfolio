@@ -1,5 +1,5 @@
 <template>
-    <div class="relative w-full h-screen flex justify-center items-center flex-col bg-white bg-new-white">
+    <div class="relative w-full h-screen flex justify-center items-center flex-col bg-white bg-new-white1122">
         <div class="justify-start">
             <h2 class="font-semibold text-[31px]">My name is</h2>
             <h1 class="font-semibold text-[100px] -mt-[16px] tracking-[4px]">CYPRIAN WACŁAW</h1>
@@ -91,41 +91,42 @@ const toggleClick = () => { }
 // })
 
 onMounted(() => {
-    // gsap.fromTo(
-    //     '.bg-new-white',
-    //     {},
-    //     {
-    //         scrollTrigger: {
-    //             trigger: ".bg-new-white",
-    //             start: "top 10%",
-    //             scrub: true,
-    //             // markers: true,
-    //             // onEnter: () => { // Wyzwala, gdy element wchodzi na ekran
-    //             //     isBlackHeader.value = true;
-    //             //     isBgBlack.value = false
-    //             // },
-    //             // onLeave: () => { // Wyzwala, gdy element znika z ekranu
-    //             //     isBlackHeader.value = false;
-    //             //     isBgBlack.value = true
-    //             // },
-    //             // onEnterBack: () => { // Wyzwala, gdy element wraca na ekran
-    //             //     isBlackHeader.value = true;
-    //             //     isBgBlack.value = false
-    //             // },
-    //             // onLeaveBack: () => { // Wyzwala, gdy element znika podczas przewijania wstecz
-    //             //     isBlackHeader.value = false;
-    //             //     isBgBlack.value = true
-    //             // },
-    //         }
-    //     }
-    // );
+    gsap.fromTo(
+        '.bg-new-white1122',
+        {},
+        {
+            scrollTrigger: {
+                trigger: ".bg-new-white1122",
+                start: "top 0%",
+                scrub: true,
+                // markers: true,
+                onEnter: () => { // Wyzwala, gdy element wchodzi na ekran
+                    isBlackHeader.value = false
+                    isBgBlack.value = true
+                },
+                onLeave: () => { // Wyzwala, gdy element znika z ekranu
+                    isBlackHeader.value = true
+                    isBgBlack.value = false
+                },
+                onEnterBack: () => { // Wyzwala, gdy element wraca na ekran
+                    isBlackHeader.value = false
+                    isBgBlack.value = true
+                },
+                onLeaveBack: () => { // Wyzwala, gdy element znika podczas przewijania wstecz
+                    isBlackHeader.value = true
+                    isBgBlack.value = false
+                },
+            }
+        }
+    );
 });
 
 </script>
 
 <style lang='scss' scoped>
-.bg-new-white {
-    transform: translateY(-70vh);
+.bg-new-white1122 {
+    transform: translateY(-71vh);
+    background: rgb(0, 0, 0)
 }
 
 .elipse {

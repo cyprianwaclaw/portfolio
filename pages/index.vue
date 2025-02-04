@@ -14,14 +14,16 @@
         <!-- <SectionsText1 class="pt-[21px]" /> -->
         <SectionsHomeImages class="pt-[85px]" />
         <SectionsTextBigImage class="pt-[100px]" />
-        <SectionsTextBigImage1 class="pt-[35px]" />
+        <SectionsSentence />
+
+        <!-- <SectionsTextBigImage1 class="pt-[35px]" /> -->
         <SectionsBlackSection />
+        <!-- <SectionsWhiteSectionTest /> -->
         <SectionsWhiteSection />
         <!-- <SectionsTextBigImage class="pt-[100px]" />
         <SectionsDarkElement class="mt-[435px]" /> -->
     </div>
 </template>
-
 <script lang="ts" setup>
 import Lenis from 'lenis'
 import { gsap } from 'gsap'

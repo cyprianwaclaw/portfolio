@@ -24,10 +24,10 @@ import { useState } from "@/store/state"
 
 const { isBlackHeader } = storeToRefs(useState())
 
-onMounted(() => {
-    isBlackHeader.value = true
-    console.log("fdsdsf")
-})
+// onMounted(() => {
+//     isBlackHeader.value = true
+//     console.log("fdsdsf")
+// })
 
 // import gsap from 'gsap'
 // import ScrollTrigger from 'gsap/ScrollTrigger'

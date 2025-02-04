@@ -29,7 +29,12 @@
 </template>
 
 <script setup lang="ts">
-import { gsap } from "gsap"
+import gsap from 'gsap'
+import { storeToRefs } from "pinia"
+import { useState } from "@/store/state"
+import ScrollTrigger from 'gsap/ScrollTrigger'
+
+const { isBlackHeader, isBgBlack } = storeToRefs(useState())
 
 const router = useRouter()
 let timeline = ref(null) as any
@@ -44,8 +49,12 @@ const props = defineProps({
 const emits = defineEmits(['closeMenu'])
 
 const goTo = (link: string) => {
+    // isBlackHeader.value = false
     router.push(link)
     emits("closeMenu")
+    // setTimeout(() => {
+    //     isBlackHeader.value = true
+    // }, 850)
 }
 const mainMenuArray = reactive([
     { name: "Index", link: "/" },

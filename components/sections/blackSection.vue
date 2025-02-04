@@ -1,5 +1,5 @@
 <template>
-    <div class="black-container">
+    <div class="black-container bg-new-white11223">
         <div class="mx-[200px]">
             <div class="text-container">
                 <p class="animated-text1">Projekty</p>
@@ -33,20 +33,67 @@
                 </div>
             </div>
         </div>
-        <div class="mt-[300px]">
+        <div class="mt-[300px] ">
             <SectionsHomeImagesWhite />
         </div>
-        <div class="bg-black h-[254px]"></div>
+        <div class="bg-black h-[345px]"></div>
     </div>
 </template>
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import gsap from 'gsap'
+import { storeToRefs } from "pinia"
+import { useState } from "@/store/state"
 import ScrollTrigger from 'gsap/ScrollTrigger'
+
+const { isBlackHeader, isBgBlack } = storeToRefs(useState())
 
 gsap.registerPlugin(ScrollTrigger);
 
+
 onMounted(() => {
+
+    gsap.fromTo(
+        '.bg-new-white11223',
+        {
+            opacity: 0,
+            duration: 0,
+
+        },
+        {
+            opacity: 1,
+            duration: 0,
+            scrollTrigger: {
+                trigger: ".bg-new-white11223",
+                // start: "top 0%",
+                start: "top-=14%",
+                // start: "top 38%", // Animacja zaczyna się 20% przed głównym elementem
+                // end: "top 30%", // Opcjonal
+                scrub: true,
+                markers: true,
+                // onUpdate: () => {
+                //     isBlackHeader.value = false
+                //     isBgBlack.value = !isBgBlack.value
+                // }
+                onEnter: () => { // Wyzwala, gdy element wchodzi na ekran
+                    isBlackHeader.value = false
+                    isBgBlack.value = true
+                },
+                onLeave: () => { // Wyzwala, gdy element znika z ekranu
+                    isBlackHeader.value = true
+                    isBgBlack.value = false
+                },
+                onEnterBack: () => { // Wyzwala, gdy element wraca na ekran
+                    isBlackHeader.value = false
+                    isBgBlack.value = true
+                },
+                onLeaveBack: () => { // Wyzwala, gdy element znika podczas przewijania wstecz
+                    isBlackHeader.value = true
+                    isBgBlack.value = false
+                },
+            }
+        }
+    );
+
     gsap.fromTo(
         '.animated-text1',
         { y: 150 },
@@ -99,6 +146,11 @@ onMounted(() => {
 .black-container {
     transform: translateY(-70vh);
 }
+
+// .bg-new-white11223 {
+//     // transform: translateY(-71vh);
+//     // background: rgb(0, 0, 0)
+// }
 
 .text-container {
     overflow: hidden;
